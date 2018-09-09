@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Date</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<script src="bootstrap/js/jquery.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script> 
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<input type="date" id="getdate" class="form-control">
+				<button class="btn btn-primary" onclick="calldatecal()">Get Info</button>
+			</div>
+			
+		</div>
+		<div class="row">
+			<h1><span id="years"></span> <span id="remainDays"></span></h1>
+			<h1><span id="days"></span></h1>
+			<h1><span id="weeks"></span></h1>
+			<h1><span id="hours"></span></h1>
+			<h1><span id="minutes"></span></h1>
+			<h1><span id="seconds"></span></h1>
+			<h1><span id="milliseconds"></span></h1>
+		</div>
+	</div>
+	
+	<script src="moment.js"></script>
+	<script>
+		function calldatecal() {
+			debugger;
+			var dob = document.getElementById('getdate').value;
+			var currentDate = moment().format('YYYY-MM-DD');
+			//alert(dob+' '+currentDate);
+			var start = moment(currentDate, 'YYYY-MM-DD');
+			var end = moment(dob, 'YYYY-MM-DD');
+			var noOfdays = moment.duration(start.diff(end)).asDays();
+			var noOfYears = Math.floor(noOfdays/365);
+			var noofremainderday = noOfdays%365;
+			var noOfweeks = Math.floor(noOfdays/7);
+			var noOfhours = noOfdays*24;
+			var noOfmintues = noOfhours*60;
+			var noOfseconds = noOfmintues*60;
+			var noOfmilliseconds = noOfseconds*100;
+			var datetimArr = [];
+			datetimArr.push({'start':start});
+			datetimArr.push({'end':end});
+			datetimArr.push({'days':noOfdays});
+			datetimArr.push({'years':noOfYears});
+			datetimArr.push({'remainDays':noofremainderday});
+			datetimArr.push({'week':noOfweeks});
+			datetimArr.push({'mins':noOfmintues});
+			datetimArr.push({'hours':noOfhours});
+			console.log(datetimArr);
+
+
+			document.getElementById('years').innerHTML = noOfYears +' Years';
+			document.getElementById('remainDays').innerHTML = noofremainderday + ' Days';
+			document.getElementById('days').innerHTML = noOfdays +' Total Days';
+			document.getElementById('weeks').innerHTML = noOfweeks +' Weeks';
+			document.getElementById('hours').innerHTML = noOfhours +' Hours';
+			document.getElementById('minutes').innerHTML = noOfmintues +' Minutes';
+			document.getElementById('seconds').innerHTML = noOfseconds +' Seconds';
+			document.getElementById('milliseconds').innerHTML = noOfmilliseconds +' MilliSeconds';
+		}
+		//var date = new Date();
+		//var datetime = new Date(year, month, day, hours, minutes, seconds, milliseconds);
+		// var datetime = moment().format();
+		// alert(datetime);
+		// moment().format()
+		// "2018-09-09T09:45:09+05:30"
+		// moment().format('DD-MM-YYYY')
+		// "09-09-2018"
+		// moment().format('DD-MM-YYYY h:mm:ss')
+		// "09-09-2018 9:45:48"
+		// moment().format('DD-MM-YYYY h:mm:ss A')
+		// "09-09-2018 9:46:00 AM"
+		// moment().format('DD-MM-YYYY HH:mm:ss A')
+		// "09-09-2018 09:46:16 AM"
+		// var a = moment().format('YYYY-MM-DD')
+		// undefined
+		// a
+		// "2018-09-09"
+		// moment(a).add(10,'days').format('YYYY-MM-DD')
+		// "2018-09-19"
+		
+	</script>
+	
+</body>
+</html>
